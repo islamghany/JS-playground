@@ -2,37 +2,39 @@ import MonacoEditor,{EditorDidMount} from "@monaco-editor/react";
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel'
 import {useRef} from 'react';
+// import codeShift from 'jscodeshift';
 // import Highlighter from 'monaco-jsx-highlighter';
-// import codeShift from 'jscodeshift'
 
 interface Props {
 	initialValue: string;
 	onChange(value: string): void;
 }
-const Editor: React.FC<Props> = ({ initialValue }) => {
-	const ref = useRef<any>(null);
-	const onEditorDidMount:EditorDidMount = (getValue,editor) => {
-		ref.current = editor;
-		editor.onDidChangeModelContent(()=>{
-			console.log(getValue())
-		})
-		editor.getModel()?.updateOptions({tabSize:2});
-		
-	   // const highlighter = new Highlighter(
-    //     // @ts-ignore
-	   // 	window.monaco,
-	   // 	codeShift,
-	   // 	editor
-	   // 	);	
-    //     highlighter.highLightOnDidChangeModelContent(
-    //        ()=>{},
-    //        ()=>{},
-    //        undefined,
-    //        ()=>{}
-    //     );
-	};
+const Editor: React.FC<Props> = ({ initialValue,onChange }) => {
+	 const editorRef = useRef<any>();
+
+  const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
+    editorRef.current = monacoEditor;
+    monacoEditor.onDidChangeModelContent(() => {
+      onChange(getValue());
+    });
+
+    monacoEditor.getModel()?.updateOptions({ tabSize: 2 });
+
+    // const highlighter = new Highlighter(
+    //   // @ts-ignore
+    //   window.monaco,
+    //   codeShift,
+    //   monacoEditor
+    // );
+    // highlighter.highLightOnDidChangeModelContent(
+    //   () => {},
+    //   () => {},
+    //   undefined,
+    //   () => {}
+    // );
+  };
 	const onFormatClick = ()=>{
-      const code = ref.current.getModel().getValue();
+      const code = editorRef.current.getModel().getValue();
 	  const formatedCode = prettier.format(code,{
 	  	parser:'babel',
 	  	plugins:[parser],
@@ -49,7 +51,7 @@ const Editor: React.FC<Props> = ({ initialValue }) => {
         arrowParens: "always",
 	  }).replace(/\n$/,'');	
 	  // chnage 
-	  ref.current.setValue(formatedCode)
+	  editorRef.current.setValue(formatedCode)
 	}
 	return (
 		<div>
