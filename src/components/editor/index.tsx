@@ -4,12 +4,31 @@ import parser from 'prettier/parser-babel'
 import {useRef} from 'react';
 // import codeShift from 'jscodeshift';
 // import Highlighter from 'monaco-jsx-highlighter';
+import styled from 'styled-components'
 
-interface Props {
-	initialValue: string;
-	onChange(value: string): void;
+const EditorContainer=styled.div`	
+  position: relative;
+  height: 90vh;
+  width: calc(100% - 10px);
+ .button-format {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
-const Editor: React.FC<Props> = ({ initialValue,onChange }) => {
+
+&:hover .button-format {
+  opacity: 1;
+}
+	
+`
+interface Props {
+	initialValue?: string;
+	onChange?:(value: string)=> void;
+}
+const Editor: React.FC<Props> = ({ initialValue='', onChange=()=>{} }) => {
 	 const editorRef = useRef<any>();
 
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
@@ -54,14 +73,14 @@ const Editor: React.FC<Props> = ({ initialValue,onChange }) => {
 	  editorRef.current.setValue(formatedCode)
 	}
 	return (
-		<div>
-		<button onClick={onFormatClick}>format</button>
+		<EditorContainer>
+		<button className="button-format" onClick={onFormatClick}>format</button>
 		<MonacoEditor
 			editorDidMount={onEditorDidMount}
 			value={initialValue}
 			language="javascript"
 			theme="dark"
-			height="500px"
+			height="100%"
 			options={{
 				wordWrap: "on",
 				minimap: { enabled: false },
@@ -73,7 +92,7 @@ const Editor: React.FC<Props> = ({ initialValue,onChange }) => {
 				automaticLayout: true,
 			}}
 		/>
-		</div>
+		</EditorContainer>
 	);
 };
 
