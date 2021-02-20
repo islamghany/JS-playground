@@ -18,7 +18,7 @@ export const theme:Theme={
 	colors:{
 		bg: "#2F2F2F",
 		primary: '#212121',
-		secondary: "#212121",
+		secondary: "#202124",
 		mainText: "#ebebeb",
 		subText: "rgb(235, 235, 235,.7)",
 		border: "#3b3b3b",

@@ -5,6 +5,8 @@ import {useRef} from 'react';
 // import codeShift from 'jscodeshift';
 // import Highlighter from 'monaco-jsx-highlighter';
 import styled from 'styled-components'
+import Button from '../button/index'
+import { update } from "../../hooks/playground";
 
 const EditorContainer=styled.div`	
   position: relative;
@@ -12,6 +14,27 @@ const EditorContainer=styled.div`
   width: calc(100% - 10px);
   overflow: hidden;
  .button-format {
+   font-size: 1.6rem;
+  line-height: 1.6;
+  background: #fff;
+  color:${({ theme }) => theme.colors.bg};;
+  border-radius: 0.6rem;
+  padding: 0 1.6rem 0;
+  height: 3.8rem;
+  min-width: 8rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: all 200ms ease-in-out;
+  font-family: "Avenir";
+  letter-spacing: 0.02rem;
+  cursor: pointer;
+  outline:none;
+   &:hover {
+      background: #f8f8f8 ;
+    }
   position: absolute;
   top: 5px;
   right: 5px;
@@ -26,6 +49,9 @@ const EditorContainer=styled.div`
 	.view-lines.monaco-mouse-cursor-text{
     background: ${({theme})=>theme.colors.secondary} !important;
     padding-left: 10px;
+    *::selection{
+      background:red  !important
+    }
   }
   .margin-view-overlays{
      background: ${({theme})=>theme.colors.secondary} !important;
@@ -33,15 +59,14 @@ const EditorContainer=styled.div`
 `
 interface Props {
 	initialValue?: string;
-	onChange?:(value: string)=> void;
 }
-const Editor: React.FC<Props> = ({ initialValue='', onChange=()=>{} }) => {
+const Editor: React.FC<Props> = ({ initialValue='' }) => {
 	 const editorRef = useRef<any>();
 
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
     editorRef.current = monacoEditor;
     monacoEditor.onDidChangeModelContent(() => {
-      onChange(getValue());
+      update('code',getValue());
     });
 
     monacoEditor.getModel()?.updateOptions({ tabSize: 2 });
@@ -81,7 +106,7 @@ const Editor: React.FC<Props> = ({ initialValue='', onChange=()=>{} }) => {
 	}
 	return (
 		<EditorContainer>
-		<button className="button-format" onClick={onFormatClick}>format</button>
+		<button className="button-format" onClick={onFormatClick}>Format</button>
 		<MonacoEditor
 			editorDidMount={onEditorDidMount}
 			value={initialValue}

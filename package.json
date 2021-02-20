@@ -25,6 +25,7 @@
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-query": "^3.9.8",
     "react-resizable": "1.11.0",
     "react-scripts": "4.0.2",
     "styled-components": "^5.2.1",

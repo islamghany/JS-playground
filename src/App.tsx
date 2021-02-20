@@ -5,9 +5,9 @@ import Resizable from "./components/resizable/index";
 import Editor from "./components/editor/index";
 
 import { useState, useEffect, useRef } from "react";
-//import * as esbuild from "esbuild-wasm";
-//import bundle from './bundle/index';
+
 import LogsContainer from "./components/console";
+import {update} from '../../hooks/playground'
 
 const Container = styled.div`
 	display: flex;
@@ -89,7 +89,7 @@ const App = () => {
 			<Header />
 			<PlaygroungWrapper>
 				<Resizable direction="horizontal">
-					<Editor initialValue="const a = 1;" onChange={() => {}} />	
+					<Editor initialValue="let myVar = 1;"  />	
 				</Resizable>
 				<Preview />
 			</PlaygroungWrapper>

@@ -5,6 +5,8 @@ import {ThemeProvider} from 'styled-components';
 import {theme} from './utils/theme';
 import GlobalStyle from './utils/style'
 import App from './App'
+import {QueryClientProvider} from 'react-query';
+import client from './hooks/index'
 // import { unpkgPathPlugin } from './bundle/plugins/unpkg-path-plugin';
 // import { fetchPlugin } from './bundle/plugins/fetch-plugin';
 // import Editor from './components/editor/';
@@ -56,10 +58,12 @@ const Root=()=>{
   //     <Preview code={code} />
   //   </div>
   // );
-  return <ThemeProvider theme={theme}>
+  return <QueryClientProvider client={client}> 
+  <ThemeProvider theme={theme}>
   <GlobalStyle />
   <App/>
   </ThemeProvider>
+  </QueryClientProvider>  
 };
 
 render(<Root />,document.querySelector('#root'));

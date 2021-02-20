@@ -60,7 +60,7 @@ const LogsContainer:React.FC = () => {
     )  
     return () => Unhook(window.console)
   }, [])
-
+  
   return <ConsoleContainer>
         <div className="content">
         <p>Console</p>

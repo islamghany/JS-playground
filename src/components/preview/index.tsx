@@ -2,10 +2,11 @@ import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import LogsContainer from "../console";
 import Resizable from "../resizable/index";
+import { useError,usePreview } from "../../hooks/playground";
 
 const PreviewContainer = styled.div`
   position: relative;
-  height:calc(100vh - 4rem);
+  height:100%;
   flex: 1;
   display:flex;
   flex-direction:column;
@@ -34,10 +35,7 @@ const PreviewContainer = styled.div`
   color: red;
 }
 `
-interface PreviewProps {
-  code?: string;
-  err?:string
-}
+
 
 const html = `
     <html>
@@ -70,25 +68,37 @@ const html = `
     </html>
   `;
 
-const Preview: React.FC<PreviewProps> = ({ code='',err=null }) => {
+
+const RenderFrame = ()=>{
+    const {data} = usePreview()
+
   const iframe = useRef<any>();
 
   useEffect(() => {
     iframe.current.srcdoc = html;
     setTimeout(() => {
-      iframe.current.contentWindow.postMessage(code, '*');
+      iframe.current.contentWindow.postMessage(data, '*');
     }, 50);
-  }, [code]);
-
-  return (
-    <PreviewContainer>
-    <iframe
+  }, [data]);
+  return <iframe
       title="preview"
       ref={iframe}
       sandbox="allow-scripts"
       srcDoc={html}
     />
-    {err && <div className="preview-error">{err}</div>}
+}
+
+const RenderError = ()=>{
+  const {data} = useError()
+
+  if(data) return  <div className="preview-error">{err}</div>
+  return null
+}
+const Preview: React.FC = () => {
+  return (
+    <PreviewContainer>
+    <RenderFrame />
+    <RenderError />
     <Resizable direction="vertical">
       <LogsContainer />
     </Resizable>
