@@ -8,8 +8,9 @@ import styled from 'styled-components'
 
 const EditorContainer=styled.div`	
   position: relative;
-  height: 90vh;
+  height: 100%;
   width: calc(100% - 10px);
+  overflow: hidden;
  .button-format {
   position: absolute;
   top: 5px;
@@ -22,7 +23,13 @@ const EditorContainer=styled.div`
 &:hover .button-format {
   opacity: 1;
 }
-	
+	.view-lines.monaco-mouse-cursor-text{
+    background: ${({theme})=>theme.colors.secondary} !important;
+    padding-left: 10px;
+  }
+  .margin-view-overlays{
+     background: ${({theme})=>theme.colors.secondary} !important;
+  }
 `
 interface Props {
 	initialValue?: string;
@@ -81,13 +88,13 @@ const Editor: React.FC<Props> = ({ initialValue='', onChange=()=>{} }) => {
 			language="javascript"
 			theme="dark"
 			height="100%"
-			options={{
+			options={{   
 				wordWrap: "on",
 				minimap: { enabled: false },
 				showUnused: false,
 				folding: false,
 				lineNumbersMinChars: 3,
-				fontSize: 16,
+				fontSize: 14,
 				scrollBeyondLastLine: false,
 				automaticLayout: true,
 			}}

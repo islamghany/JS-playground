@@ -1,16 +1,21 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-const PreviewContainer = styled.div`
-  
-  position: relative;
-  height: 100%;
-  flex-grow: 1;
+import LogsContainer from "../console";
+import Resizable from "../resizable/index";
 
+const PreviewContainer = styled.div`
+  position: relative;
+  height:calc(100vh - 4rem);
+  flex: 1;
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+ 
  iframe {
-  height: 100%;
   width: 100%;
   border:0;
   background:#fff;
+  flex:1
 }
 
 .react-draggable-transparent-selection &:after {
@@ -30,8 +35,8 @@ const PreviewContainer = styled.div`
 }
 `
 interface PreviewProps {
-  code: string;
-  err:string
+  code?: string;
+  err?:string
 }
 
 const html = `
@@ -65,7 +70,7 @@ const html = `
     </html>
   `;
 
-const Preview: React.FC<PreviewProps> = ({ code,err }) => {
+const Preview: React.FC<PreviewProps> = ({ code='',err=null }) => {
   const iframe = useRef<any>();
 
   useEffect(() => {
@@ -84,7 +89,10 @@ const Preview: React.FC<PreviewProps> = ({ code,err }) => {
       srcDoc={html}
     />
     {err && <div className="preview-error">{err}</div>}
-    </PreviewContainer>
+    <Resizable direction="vertical">
+      <LogsContainer />
+    </Resizable>
+  </PreviewContainer>
   );
 };
 
