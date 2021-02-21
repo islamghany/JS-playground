@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import LogsContainer from "../console";
-import Resizable from "../resizable/index";
+//import LogsContainer from "../console";
+//import Resizable from "../resizable/index";
 import { useError,usePreview } from "../../hooks/playground";
 
 const PreviewContainer = styled.div`
@@ -70,10 +70,9 @@ const html = `
 
 
 const RenderFrame = ()=>{
-    const {data} = usePreview()
+  const {data} = usePreview()
 
   const iframe = useRef<any>();
-
   useEffect(() => {
     iframe.current.srcdoc = html;
     setTimeout(() => {
@@ -99,11 +98,11 @@ const Preview: React.FC = () => {
     <PreviewContainer>
     <RenderFrame />
     <RenderError />
-    <Resizable direction="vertical">
-      <LogsContainer />
-    </Resizable>
+   
   </PreviewContainer>
   );
 };
-
+/* <Resizable direction="vertical">
+      <LogsContainer />
+    </Resizable>*/
 export default Preview;

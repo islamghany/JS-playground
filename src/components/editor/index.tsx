@@ -8,6 +8,22 @@ import styled from 'styled-components'
 import Button from '../button/index'
 import { update } from "../../hooks/playground";
 
+const  showFunc = `
+    import _React from 'react';
+    import _ReactDOM from 'react-dom';
+    var show = (value) => {
+      const root = document.querySelector('#root');
+      if (typeof value === 'object') {
+        if (value.$$typeof && value.props) {
+          _ReactDOM.render(value, root);
+        } else {
+          root.innerHTML = JSON.stringify(value);
+        }
+      } else {
+        root.innerHTML = value;
+      }
+    };
+  `;
 const EditorContainer=styled.div`	
   position: relative;
   height: 100%;
@@ -47,15 +63,10 @@ const EditorContainer=styled.div`
   opacity: 1;
 }
 	.view-lines.monaco-mouse-cursor-text{
-    background: ${({theme})=>theme.colors.secondary} !important;
     padding-left: 10px;
-    *::selection{
-      background:red  !important
-    }
+    
   }
-  .margin-view-overlays{
-     background: ${({theme})=>theme.colors.secondary} !important;
-  }
+  
 `
 interface Props {
 	initialValue?: string;
@@ -66,7 +77,7 @@ const Editor: React.FC<Props> = ({ initialValue='' }) => {
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
     editorRef.current = monacoEditor;
     monacoEditor.onDidChangeModelContent(() => {
-      update('code',getValue());
+      update('code',showFunc + getValue());
     });
 
     monacoEditor.getModel()?.updateOptions({ tabSize: 2 });

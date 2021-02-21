@@ -3,20 +3,33 @@ import Button from "../button/index";
 import { useCode, update } from "../../hooks/playground";
 import * as esbuild from "esbuild-wasm";
 import bundle from "../../bundle/index";
-
+import {Setting,Close} from '../../assets/icons'
+import { motion, AnimatePresence } from "framer-motion";
+import {useState} from 'react';
+import Toggle from '../toggle/index';
+import {useQuery} from 'react-query'
 const HeaderContainer = styled.header`
 	display: flex;
 	width: 100%;
 	background: ${({ theme }) => theme.colors.bg};
 	border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-	padding: 0.4rem 3rem;
+	padding: 1rem 3rem;
+	justify-content: space-between;
+	button{
+		svg{
+			path{
+				fill:${({ theme }) => theme.colors.primary};
+			}
+		}
+	}
 `;
 
 const Run = () => {
 	const { data } = useCode();
 	const onClick = async () => {
 		const output = await bundle(data);
-		if(output.error) update('error',output.err);
+		
+		if(output?.err) update('error',output.err);
 		else update('preview',output.code);	
 	};
 	return (
@@ -28,10 +41,176 @@ const Run = () => {
 	);
 };
 
+const ModalContainer = styled.div`
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	background: rgba(0, 0, 0, 0.2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+`;
+const ModalBody = styled(motion.div)`
+	background: ${({ theme }) => theme.colors.bg};
+	padding: 3rem;
+	border-radius: 0.8rem;
+	margin: 1.5rem;
+	position: relative;
+	max-width: 60rem;
+		width: 100%;
+	.modal {
+		&__title {
+			font-size:2.4rem;
+			color:${({ theme }) => theme.colors.mainText}
+			border-bottom:${({ theme }) => theme.colors.border}
+		}
+		&__body {
+			margin: 2rem 0;
+		}
+		&__footer {
+			display: flex;
+			justify-content: flex-end;
+		}
+		&__close {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 4rem;
+			height: 4rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			z-index: 1;
+			border-radius: 2rem;
+			svg{
+				path{
+					fill: ${({ theme }) => theme.colors.primary};
+				}
+			}
+		}
+	}
+	&.xsmall {
+		max-width: 40rem;
+		width: 100%;
+	}
+	&.small {
+		max-width: 60rem;
+		width: 100%;
+	}
+	&.medium {
+		max-width: 80rem;
+		width: 100%;
+	}
+	&.large {
+		max-width: 96.8rem;
+		width: 100%;
+	}
+`;
+
+
+
+interface ModalProps{
+	show:boolean;
+	onHide:()=>void
+}
+interface RowProps {
+	name,
+}
+const Row:React.FC<RowProps> = ({name,children})=>{
+	const {data} = useQuery(name,()=>{},{
+    	enabled:false,
+    	retry:false,
+    	staleTime:Infinity,
+    	cacheTime:Infinity
+    })
+  return <Toggle name={name}>
+  	{children}
+  </Toggle>
+}
+const Modal:React.FC<ModalProps> = ({
+	children,
+	show = false,
+	onHide = () => {},
+}) => {
+	return (
+		<AnimatePresence>
+			{show && (
+				<ModalContainer
+					onClick={onHide}
+					className="modal__wrapper"
+					initial={{opacity:0}}
+					animate={{
+						opacity: 1,
+					}}
+					exit={{
+						opacity: 0,
+					}}
+					transition={{ duration: 0.3 }}
+				>
+					<ModalBody
+						initial={{
+							scale: 0,
+							opacity: 0,
+						}}
+						animate={{
+							scale: 1,
+							opacity: 1,
+						}}
+						exit={{
+							scale: 0,
+							opacity: 0,
+						}}
+						transition={{ duration: 0.3 }}
+						onClick={(e) => {
+							e.stopPropagation();
+						}}
+					>
+						<div onClick={onHide} className="modal__close">
+							<Close />
+						</div>
+						 <div className="modal__title">Setting</div>
+						 <div className="modal__body">
+						 <Row name="theme">
+						  Activate the dark theme
+						 </Row>
+						 <Row name="save">
+						  Saving while typing
+						 </Row>
+						 <Row name="minimap">
+						 	Show Mini map
+						 </Row>  	
+						 </div>
+					</ModalBody>
+				</ModalContainer>
+			)}
+		</AnimatePresence>
+	);
+};
+const Options = ()=>{
+	const [show,setShow] =useState(false);
+	const onHide =()=>setShow(false);
+	const onShow =()=>setShow(true)
+return (
+	<>
+		<Button
+			onClick={onShow}
+		>
+			<Setting  />
+		</Button>
+		<Modal show={show} onHide={onHide}/>
+	</>
+	);
+}
 const Header = () => {
 	return (
 		<HeaderContainer>
 			<Run />
+			<Options />
 		</HeaderContainer>
 	);
 };

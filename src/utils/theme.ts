@@ -16,8 +16,8 @@ export interface Theme{
 
 export const theme:Theme={
 	colors:{
-		bg: "#2F2F2F",
-		primary: '#212121',
+		bg: "#161B22",
+		primary: '#58a6ff',
 		secondary: "#202124",
 		mainText: "#ebebeb",
 		subText: "rgb(235, 235, 235,.7)",
