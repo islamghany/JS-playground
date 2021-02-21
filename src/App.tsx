@@ -8,6 +8,10 @@ import { useState, useEffect, useRef } from "react";
 
 import LogsContainer from "./components/console";
 import {update} from '../../hooks/playground'
+import {useListen} from './hooks/playground'
+import {ThemeProvider} from 'styled-components';
+import {light,dark} from './utils/theme';
+import GlobalStyle from './utils/style'
 
 const Container = styled.div`
 	display: flex;
@@ -60,40 +64,21 @@ const PlaygroungWrapper = styled.div`
 `;
 
 const App = () => {
-	// 	const ref = useRef<any>();
-	// 	const [code, setCode] = useState("");
-	// 	const [input, setInput] = useState("");
-	//   const [err, setErr] = useState('');
-
-	// 	const startService = async () => {
-	// 		ref.current = await esbuild.startService({
-	// 			worker: true,
-	// 			wasmURL: "https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm",
-	// 		});
-	// 	};
-	// 	useEffect(() => {
-	// 		startService();
-	// 	}, []);
-
-	// 	const onClick = async () => {
-	// 		if (!ref.current) {
-	// 			return;
-	// 		}
-
-	// 		const output = await bundle(input);
-	//       setCode(output.code);
-	//       setErr(output.err);
-	// 	};
+	const {data} = useListen('theme');
+	console.log(data);
 	return (
+		 <ThemeProvider theme={data === 'on' ? light: dark }>
+  <GlobalStyle />
 		<Container>
 			<Header />
 			<PlaygroungWrapper>
 				<Resizable direction="horizontal">
-					<Editor initialValue="let myVar = 1;"  />	
+					<Editor light={data === 'on' ? true: false } initialValue="let myVar = 1;"  />	
 				</Resizable>
 				<Preview />
 			</PlaygroungWrapper>
 		</Container>
+		</ThemeProvider>
 	);
 };
 /*<div>

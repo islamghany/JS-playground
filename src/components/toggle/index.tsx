@@ -36,12 +36,12 @@ const Unit = styled.div`
   
       &::after{
         content: "";
-        padding-top: 3px;
-        width: 20px;
-        height: 20px;
+        padding-top: .3rem;
+        width: 2rem;
+        height: 2rem;
         position: relative;
        
-        left: 3px;
+        left: .3rem;
         background-color: white;
         display: block;
         border-radius: 50%;
@@ -56,19 +56,24 @@ const Unit = styled.div`
  interface Props{
    name:string,
    active?:boolean,
-   onCheck?:(active:boolean)=>void
+   onCheck?:(active:string)=>void
  }
  const Toggle:React.FC<Props> = ({children,name,active=false,onCheck})=>{
-  const [checked,setChecked] = useState(active)
   return <Unit>
     <div className="toggle">
       <div className="toggle__content">
         {children}
       </div>
       <div className="toggle__container">
-        <input type="checkbox" value={checked} className="form__toggle" id={name} onChange={(e)=>{
-         let on = e.target.value ? true :false
-         setChecked(on);
+        <input 
+          type="checkbox" 
+          checked={active} 
+          className="form__toggle" 
+          id={name} 
+
+          onChange={(e)=>{
+         let on = e.target.checked ? 'on' : 'off';
+         
          onCheck(on);
           }} />
           <label htmlFor={name} className="toggle__label ios">

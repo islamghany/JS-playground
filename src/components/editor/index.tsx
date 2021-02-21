@@ -70,8 +70,9 @@ const EditorContainer=styled.div`
 `
 interface Props {
 	initialValue?: string;
+  light?:boolean
 }
-const Editor: React.FC<Props> = ({ initialValue='' }) => {
+const Editor: React.FC<Props> = ({ initialValue='',light }) => {
 	 const editorRef = useRef<any>();
 
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
@@ -122,7 +123,7 @@ const Editor: React.FC<Props> = ({ initialValue='' }) => {
 			editorDidMount={onEditorDidMount}
 			value={initialValue}
 			language="javascript"
-			theme="dark"
+			theme={light ? 'light' : 'dark'}
 			height="100%"
 			options={{   
 				wordWrap: "on",

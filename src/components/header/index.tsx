@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "../button/index";
-import { useCode, update } from "../../hooks/playground";
+import { useCode, update,updateStorage } from "../../hooks/playground";
 import * as esbuild from "esbuild-wasm";
 import bundle from "../../bundle/index";
 import {Setting,Close} from '../../assets/icons'
@@ -127,8 +127,13 @@ const Row:React.FC<RowProps> = ({name,children})=>{
     	retry:false,
     	staleTime:Infinity,
     	cacheTime:Infinity
-    })
-  return <Toggle name={name}>
+    });
+    const onCheck = (active:string)=>{
+        updateStorage(name,active)
+    }
+  return <Toggle 
+  onCheck={onCheck}
+  name={name} active={data === 'on' ? true :false}>
   	{children}
   </Toggle>
 }

@@ -1,9 +1,6 @@
 //import * as esbuild from 'esbuild-wasm';
 //import  { useState, useEffect, useRef } from 'react';
 import {render} from 'react-dom';
-import {ThemeProvider} from 'styled-components';
-import {theme} from './utils/theme';
-import GlobalStyle from './utils/style'
 import App from './App'
 import {QueryClientProvider} from 'react-query';
 import client from './hooks/index'
@@ -59,10 +56,7 @@ const Root=()=>{
   //   </div>
   // );
   return <QueryClientProvider client={client}> 
-  <ThemeProvider theme={theme}>
-  <GlobalStyle />
   <App/>
-  </ThemeProvider>
   </QueryClientProvider>  
 };
 
