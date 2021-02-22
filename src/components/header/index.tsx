@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import Button from "../button/index";
-import { useCode, update,updateStorage } from "../../hooks/playground";
+import {
+	useCode,
+	update,
+	updateStorage,
+	useSyncCode,
+	useListen,
+} from "../../hooks/playground";
 import * as esbuild from "esbuild-wasm";
 import bundle from "../../bundle/index";
-import {Setting,Close} from '../../assets/icons'
+import { Setting, Close } from "../../assets/icons";
 import { motion, AnimatePresence } from "framer-motion";
-import {useState} from 'react';
-import Toggle from '../toggle/index';
-import {useQuery} from 'react-query'
+import { useState, useEffect, useRef } from "react";
+import Toggle from "../toggle/index";
+import { useQuery } from "react-query";
 const HeaderContainer = styled.header`
 	display: flex;
 	width: 100%;
@@ -15,30 +21,44 @@ const HeaderContainer = styled.header`
 	border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 	padding: 1rem 3rem;
 	justify-content: space-between;
-	button{
-		svg{
-			path{
-				fill:${({ theme }) => theme.colors.primary};
+	button {
+		svg {
+			path {
+				fill: ${({ theme }) => theme.colors.primary};
 			}
 		}
 	}
 `;
 
+let timer;
+
 const Run = () => {
 	const { data } = useCode();
-	const onClick = async () => {
+	const isSync = useListen("save");
+	const mountRef = useRef<any>(null);
+	const makeBundle = async () => {
 		const output = await bundle(data);
-		
-		if(output?.err) update('error',output.err);
-		else update('preview',output.code);	
+		if (!output?.err) update("preview", output.code);
+		update("error", output.err);
 	};
-	return (
-		<Button
-			onClick={onClick}
-		>
-			Run
-		</Button>
-	);
+	const onClick = async () => {
+		makeBundle();
+	};
+	useEffect(() => {
+		if (isSync.data === "off") return;
+		if (!mountRef.current) {
+			mountRef.current = true;
+			return;
+		}
+		if (timer) {
+			clearTimeout(timer);
+		}
+		timer = setTimeout(async () => {
+			makeBundle();
+		}, 1000);
+		return () => clearTimeout(timer);
+	}, [data]);
+	return <Button onClick={onClick}>Run</Button>;
 };
 
 const ModalContainer = styled.div`
@@ -112,32 +132,34 @@ const ModalBody = styled(motion.div)`
 	}
 `;
 
-
-
-interface ModalProps{
-	show:boolean;
-	onHide:()=>void
+interface ModalProps {
+	show: boolean;
+	onHide: () => void;
 }
 interface RowProps {
-	name,
+	name;
 }
-const Row:React.FC<RowProps> = ({name,children})=>{
-	const {data} = useQuery(name,()=>{},{
-    	enabled:false,
-    	retry:false,
-    	staleTime:Infinity,
-    	cacheTime:Infinity
-    });
-    const onCheck = (active:string)=>{
-        updateStorage(name,active)
-    }
-  return <Toggle 
-  onCheck={onCheck}
-  name={name} active={data === 'on' ? true :false}>
-  	{children}
-  </Toggle>
-}
-const Modal:React.FC<ModalProps> = ({
+const Row: React.FC<RowProps> = ({ name, children }) => {
+	const { data } = useQuery(name, () => {}, {
+		enabled: false,
+		retry: false,
+		staleTime: Infinity,
+		cacheTime: Infinity,
+	});
+	const onCheck = (active: string) => {
+		updateStorage(name, active);
+	};
+	return (
+		<Toggle
+			onCheck={onCheck}
+			name={name}
+			active={data === "on" ? true : false}
+		>
+			{children}
+		</Toggle>
+	);
+};
+const Modal: React.FC<ModalProps> = ({
 	children,
 	show = false,
 	onHide = () => {},
@@ -148,7 +170,7 @@ const Modal:React.FC<ModalProps> = ({
 				<ModalContainer
 					onClick={onHide}
 					className="modal__wrapper"
-					initial={{opacity:0}}
+					initial={{ opacity: 0 }}
 					animate={{
 						opacity: 1,
 					}}
@@ -178,39 +200,31 @@ const Modal:React.FC<ModalProps> = ({
 						<div onClick={onHide} className="modal__close">
 							<Close />
 						</div>
-						 <div className="modal__title">Setting</div>
-						 <div className="modal__body">
-						 <Row name="theme">
-						  Activate the dark theme
-						 </Row>
-						 <Row name="save">
-						  Saving while typing
-						 </Row>
-						 <Row name="minimap">
-						 	Show Mini map
-						 </Row>  	
-						 </div>
+						<div className="modal__title">Setting</div>
+						<div className="modal__body">
+							<Row name="theme">Activate the dark theme</Row>
+							<Row name="save">Saving while typing</Row>
+							<Row name="minimap">Show Mini map</Row>
+						</div>
 					</ModalBody>
 				</ModalContainer>
 			)}
 		</AnimatePresence>
 	);
 };
-const Options = ()=>{
-	const [show,setShow] =useState(false);
-	const onHide =()=>setShow(false);
-	const onShow =()=>setShow(true)
-return (
-	<>
-		<Button
-			onClick={onShow}
-		>
-			<Setting  />
-		</Button>
-		<Modal show={show} onHide={onHide}/>
-	</>
+const Options = () => {
+	const [show, setShow] = useState(false);
+	const onHide = () => setShow(false);
+	const onShow = () => setShow(true);
+	return (
+		<>
+			<Button onClick={onShow}>
+				<Setting />
+			</Button>
+			<Modal show={show} onHide={onHide} />
+		</>
 	);
-}
+};
 const Header = () => {
 	return (
 		<HeaderContainer>

@@ -6,7 +6,7 @@ import {useRef} from 'react';
 // import Highlighter from 'monaco-jsx-highlighter';
 import styled from 'styled-components'
 import Button from '../button/index'
-import { update } from "../../hooks/playground";
+import { update,useListen } from "../../hooks/playground";
 
 const  showFunc = `
     import _React from 'react';
@@ -17,10 +17,14 @@ const  showFunc = `
         if (value.$$typeof && value.props) {
           _ReactDOM.render(value, root);
         } else {
-          root.innerHTML = JSON.stringify(value);
+          var node = document.createElement("div");
+          node.innerHTML = JSON.stringify(value);                 
+          root.appendChild(node);
         }
       } else {
-        root.innerHTML = value;
+          var node = document.createElement("div");
+          node.innerHTML = value;                 
+          root.appendChild(node);
       }
     };
   `;
@@ -70,18 +74,18 @@ const EditorContainer=styled.div`
 `
 interface Props {
 	initialValue?: string;
-  light?:boolean
+  light?:boolean;
 }
 const Editor: React.FC<Props> = ({ initialValue='',light }) => {
+   const isSync = useListen('save');
 	 const editorRef = useRef<any>();
-
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
     editorRef.current = monacoEditor;
     monacoEditor.onDidChangeModelContent(() => {
       update('code',showFunc + getValue());
     });
 
-    monacoEditor.getModel()?.updateOptions({ tabSize: 2 });
+    monacoEditor.getModel()?.updateOptions({ tabSize: 4 });
 
     // const highlighter = new Highlighter(
     //   // @ts-ignore

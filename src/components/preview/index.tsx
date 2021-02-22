@@ -90,7 +90,7 @@ const RenderFrame = ()=>{
 const RenderError = ()=>{
   const {data} = useError()
 
-  if(data) return  <div className="preview-error">{err}</div>
+  if(data) return  <div className="preview-error">{data}</div>
   return null
 }
 const Preview: React.FC = () => {

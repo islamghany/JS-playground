@@ -4,10 +4,7 @@ import Preview from "./components/preview/index";
 import Resizable from "./components/resizable/index";
 import Editor from "./components/editor/index";
 
-import { useState, useEffect, useRef } from "react";
 
-import LogsContainer from "./components/console";
-import {update} from '../../hooks/playground'
 import {useListen} from './hooks/playground'
 import {ThemeProvider} from 'styled-components';
 import {light,dark} from './utils/theme';
@@ -65,7 +62,6 @@ const PlaygroungWrapper = styled.div`
 
 const App = () => {
 	const {data} = useListen('theme');
-	console.log(data);
 	return (
 		 <ThemeProvider theme={data === 'on' ? light: dark }>
   <GlobalStyle />
