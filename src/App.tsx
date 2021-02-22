@@ -69,7 +69,7 @@ const App = () => {
 			<Header />
 			<PlaygroungWrapper>
 				<Resizable direction="horizontal">
-					<Editor light={data === 'on' ? true: false } initialValue="let myVar = 1;"  />	
+					<Editor light={data === 'on' ? true: false } initialValue="// use show() instead of console.log();"  />	
 				</Resizable>
 				<Preview />
 			</PlaygroungWrapper>
