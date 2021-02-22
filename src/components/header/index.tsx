@@ -202,7 +202,7 @@ const Modal: React.FC<ModalProps> = ({
 						</div>
 						<div className="modal__title">Setting</div>
 						<div className="modal__body">
-							<Row name="theme">Activate the dark theme</Row>
+							<Row name="theme">Activate the light theme</Row>
 							<Row name="save">Saving while typing</Row>
 							<Row name="minimap">Show Mini map</Row>
 						</div>

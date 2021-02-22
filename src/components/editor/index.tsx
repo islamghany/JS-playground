@@ -2,8 +2,8 @@ import MonacoEditor,{EditorDidMount} from "@monaco-editor/react";
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel'
 import {useRef} from 'react';
-// import codeShift from 'jscodeshift';
-// import Highlighter from 'monaco-jsx-highlighter';
+import codeShift from 'jscodeshift';
+import Highlighter from 'monaco-jsx-highlighter';
 import styled from 'styled-components'
 import Button from '../button/index'
 import { update,useListen } from "../../hooks/playground";
@@ -78,6 +78,7 @@ interface Props {
 }
 const Editor: React.FC<Props> = ({ initialValue='',light }) => {
    const isSync = useListen('save');
+   const isMiniMap = useListen('minimap');
 	 const editorRef = useRef<any>();
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
     editorRef.current = monacoEditor;
@@ -87,18 +88,18 @@ const Editor: React.FC<Props> = ({ initialValue='',light }) => {
 
     monacoEditor.getModel()?.updateOptions({ tabSize: 4 });
 
-    // const highlighter = new Highlighter(
-    //   // @ts-ignore
-    //   window.monaco,
-    //   codeShift,
-    //   monacoEditor
-    // );
-    // highlighter.highLightOnDidChangeModelContent(
-    //   () => {},
-    //   () => {},
-    //   undefined,
-    //   () => {}
-    // );
+    const highlighter = new Highlighter(
+      // @ts-ignore
+      window.monaco,
+      codeShift,
+      monacoEditor
+    );
+    highlighter.highLightOnDidChangeModelContent(
+      () => {},
+      () => {},
+      undefined,
+      () => {}
+    );
   };
 	const onFormatClick = ()=>{
       const code = editorRef.current.getModel().getValue();
@@ -131,7 +132,7 @@ const Editor: React.FC<Props> = ({ initialValue='',light }) => {
 			height="100%"
 			options={{   
 				wordWrap: "on",
-				minimap: { enabled: false },
+				minimap: { enabled: isMiniMap.data === 'on' ? true : false },
 				showUnused: false,
 				folding: false,
 				lineNumbersMinChars: 3,

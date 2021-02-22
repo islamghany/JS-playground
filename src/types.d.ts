@@ -1,6 +1,5 @@
-//declare module 'monaco-jsx-highlighter';
+declare module 'monaco-jsx-highlighter';
 
-// import original module declarations
 import 'styled-components';
 import {Theme} from './utils/theme'
 // and extend them!
