@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "../button/index";
+//import Button from "../button/";
 import {
 	useCode,
 	update,
@@ -9,13 +9,49 @@ import {
 } from "../../hooks/playground";
 import * as esbuild from "esbuild-wasm";
 import bundle from "../../bundle/index";
-import { Setting, Close } from "../../assets/icons";
+import { Setting , Close,Roller, Upload,Download } from "../../assets/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Toggle from "../toggle/index";
 import { useQuery } from "react-query";
 import Loader from "../loader"
 
+const  Button = styled.button`
+	  cursor: pointer;
+		 padding: .6rem 1.6rem;
+		 background: ${({ theme }) => theme.colors.primary};
+		 font-size: 1.4rem;
+		 color: #ffffff;
+		 border: none;
+		 outline: none;
+		 border-radius: .4rem;
+		 z-index: 109;
+		 font-weight: bold;
+		 outline:none;
+		 transition:background .3s easy:
+		 &:hover{
+			 background:rgb(62, 85, 204)
+		 }
+`
+const  IconButton = styled.button`
+		display: flex;
+		text-align: center;
+		background: transparent;
+		border-radius: 2px;
+		padding: .6rem;
+    margin-left: 16px;
+		border:1px solid ${({ theme }) => theme.colors.bar};
+		cursor:pointer;
+		border-radius:.4rem;
+		outline:none;
+		font-size:2.4rem;
+		svg{
+
+			path, circle{
+				stroke:${({ theme }) => theme.colors.mainText} !important;
+			}
+		}
+`
 const HeaderContainer = styled.header`
 	display: flex;
 	width: 100%;
@@ -23,12 +59,9 @@ const HeaderContainer = styled.header`
 	border-bottom:${({ theme }) => theme.colors.border};
 	padding: 1rem 3rem;
 	justify-content: space-between;
-	button {
-		svg {
-			path {
-				fill: ${({ theme }) => theme.colors.primary};
-			}
-		}
+	align-items:center;
+  .row{
+		display:flex;
 	}
 `;
 
@@ -92,8 +125,8 @@ const ModalBody = styled(motion.div)`
 	.modal {
 		&__title {
 			font-size:2.4rem;
-			color:${({ theme }) => theme.colors.mainText}
-			border-bottom:${({ theme }) => theme.colors.border}
+			color:${({ theme }) => theme.colors.mainText};
+			border-bottom:${({ theme }) => theme.colors.border};
 		}
 		&__body {
 			margin: 2rem 0;
@@ -225,9 +258,9 @@ const Options = () => {
 	const onShow = () => setShow(true);
 	return (
 		<>
-			<Button onClick={onShow}>
+			<IconButton Title="Settings" onClick={onShow}>
 				<Setting />
-			</Button>
+			</IconButton>
 			<Modal show={show} onHide={onHide} />
 		</>
 	);
@@ -235,7 +268,18 @@ const Options = () => {
 const Header = () => {
 	return (
 		<HeaderContainer>
-			<Run />
+			<div className="row">
+            <Run />
+						<IconButton title="Beatify Code">
+							<Roller />
+						</IconButton>
+						<IconButton title="Download">
+							<Download />
+						</IconButton>
+						<IconButton title="Upload Code">
+							<Upload />
+						</IconButton>
+			</div>
 			<Options />
 		</HeaderContainer>
 	);
