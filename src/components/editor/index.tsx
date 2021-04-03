@@ -1,13 +1,13 @@
 import MonacoEditor,{EditorDidMount} from "@monaco-editor/react";
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel'
-import {useRef} from 'react';
+import {useRef,useEffect} from 'react';
 import codeShift from 'jscodeshift';
 import Highlighter from 'monaco-jsx-highlighter';
 import styled from 'styled-components'
 import Button from '../button/index'
 import { update,useListen } from "../../hooks/playground";
-
+const download = require("downloadjs");
 const  showFunc = `
     import _React from 'react';
     import _ReactDOM from 'react-dom';
@@ -18,17 +18,17 @@ const  showFunc = `
           _ReactDOM.render(value, root);
         } else {
           var node = document.createElement("div");
-          node.innerHTML = JSON.stringify(value);                 
+          node.innerHTML = JSON.stringify(value);
           root.appendChild(node);
         }
       } else {
           var node = document.createElement("div");
-          node.innerHTML = value;                 
+          node.innerHTML = value;
           root.appendChild(node);
       }
     };
   `;
-const EditorContainer=styled.div`	
+const EditorContainer=styled.div`
   position: relative;
   height: 100%;
   width: calc(100% - 10px);
@@ -68,17 +68,20 @@ const EditorContainer=styled.div`
 }
 	.view-lines.monaco-mouse-cursor-text{
     padding-left: 10px;
-    
+
   }
-  
+
 `
 interface Props {
 	initialValue?: string;
   light?:boolean;
 }
+let t=false,t2=false;
 const Editor: React.FC<Props> = ({ initialValue='',light }) => {
    const isSync = useListen('save');
    const isMiniMap = useListen('minimap');
+   const beutify = useListen('beutify');
+   const downloadData = useListen('download');
 	 const editorRef = useRef<any>();
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
     editorRef.current = monacoEditor;
@@ -102,7 +105,7 @@ const Editor: React.FC<Props> = ({ initialValue='',light }) => {
     );
   };
 	const onFormatClick = ()=>{
-      const code = editorRef.current.getModel().getValue();
+    const code = editorRef.current.getModel().getValue();
 	  const formatedCode = prettier.format(code,{
 	  	parser:'babel',
 	  	plugins:[parser],
@@ -117,20 +120,36 @@ const Editor: React.FC<Props> = ({ initialValue='',light }) => {
         bracketSpacing: true,
         jsxBracketSameLine: false,
         arrowParens: "always",
-	  }).replace(/\n$/,'');	
-	  // chnage 
+	  }).replace(/\n$/,'');
+	  // chnage
 	  editorRef.current.setValue(formatedCode)
 	}
+  const onDownload = ()=>{
+    download(editorRef.current.getModel().getValue(), "playground.js", "text/javascript");
+  }
+  useEffect(()=>{
+    if(!t){
+      t=true;
+      return;
+    }
+    onFormatClick();
+  },[beutify.data])
+  useEffect(()=>{
+    if(!t2){
+      t2=true;
+      return;
+    }
+    onDownload();
+  },[downloadData.data])
 	return (
 		<EditorContainer>
-		<button className="button-format" onClick={onFormatClick}>Format</button>
 		<MonacoEditor
 			editorDidMount={onEditorDidMount}
 			value={initialValue}
 			language="javascript"
 			theme={light ? 'light' : 'dark'}
 			height="100%"
-			options={{   
+			options={{
 				wordWrap: "on",
 				minimap: { enabled: isMiniMap.data === 'on' ? true : false },
 				showUnused: false,

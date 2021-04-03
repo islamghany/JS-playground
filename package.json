@@ -17,6 +17,7 @@
     "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
     "console-feed": "^3.2.2",
+    "downloadjs": "^1.4.7",
     "esbuild-wasm": "0.8.27",
     "framer-motion": "^3.6.2",
     "jscodeshift": "0.11.0",

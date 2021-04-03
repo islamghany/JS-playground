@@ -77,7 +77,9 @@ const Run = () => {
 		update("error", output.err);
 	};
 	const onClick = async () => {
-		 makeBundle();
+		 update("building", true);
+		 await makeBundle();
+		 update("building", false);
 	};
 	const firstGlance = async ()=>{
 		await makeBundle();
@@ -94,7 +96,7 @@ const Run = () => {
 			clearTimeout(timer);
 		}
 		timer = setTimeout(async () => {
-			makeBundle();
+		    onClick();
 		}, 1000);
 		return () => clearTimeout(timer);
 	}, [data]);
@@ -265,19 +267,17 @@ const Options = () => {
 		</>
 	);
 };
+
 const Header = () => {
 	return (
 		<HeaderContainer>
 			<div className="row">
             <Run />
-						<IconButton title="Beatify Code">
-							<Roller />
-						</IconButton>
-						<IconButton title="Download">
+						<IconButton title="Download" onClick={()=>update('download',1000 * Math.random())}>
 							<Download />
 						</IconButton>
-						<IconButton title="Upload Code">
-							<Upload />
+						<IconButton title="Beutify Code" onClick={()=>update('beutify',1000 * Math.random())}>
+							<Roller />
 						</IconButton>
 			</div>
 			<Options />

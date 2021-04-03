@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
 //import LogsContainer from "../console";
 //import Resizable from "../resizable/index";
 import { useError,usePreview,useListen } from "../../hooks/playground";
@@ -68,6 +68,42 @@ const html=(bg="#fff",color="#222") => `
     </html>
   `;
 
+const circAnim = keyframes`
+from {
+   transform: rotate(0);
+ }
+ to {
+   transform: rotate(360deg);
+ }
+`
+const LoadingContainer = styled.div`
+  position:absolute;
+  z-index:10;
+  right:.6rem;
+  top:.4rem;
+  .circonf {
+  $size:2em;
+  $speed: .7s;
+  margin: 1em;
+  display:inline-block;
+  width:3rem;
+  height:3rem;
+  border-radius:50%;
+  border:4px solid silver;
+  animation: ${circAnim} .7s linear infinite;
+  border-color: grey;
+  border-bottom-color:transparent;
+  border-left-color:transparent;
+}
+`
+const Loading = ()=>{
+  const {data} = useListen('building');
+  if(data) return <LoadingContainer>
+    <div class="circonf">
+    </div>
+  </LoadingContainer>
+  return null
+}
 
 const RenderFrame = ()=>{
   const {data} = usePreview()
@@ -96,6 +132,7 @@ const RenderError = ()=>{
 const Preview: React.FC = () => {
   return (
     <PreviewContainer>
+     <Loading />
     <RenderFrame />
     <RenderError />
   </PreviewContainer>

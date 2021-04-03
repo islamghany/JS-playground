@@ -59,7 +59,23 @@ const PlaygroungWrapper = styled.div`
 		background: ${({theme})=>theme.colors.bar};
 	}
 `;
-
+const Footer = styled.div`
+ background: ${({theme})=>theme.colors.bg};
+border-top: ${({theme})=>theme.colors.border};
+ p{
+	 height:2rem;
+	 color: ${({theme})=>theme.colors.mainText};
+	 font-size:	1.2rem;
+	 display:flex;
+	 align-items:center;
+	 justify-content:center;
+	 a{
+		 color: ${({theme})=>theme.colors.primary};
+		 display:inline-block;
+		 margin-left:.6rem;
+	 }
+ }
+`
 const App = () => {
 	const {data} = useListen('theme');
 	return (
@@ -70,10 +86,15 @@ const App = () => {
 			<Loader />
 			<PlaygroungWrapper>
 				<Resizable direction="horizontal">
-					<Editor light={data === 'on' ? true: false } initialValue="// use show() instead of console.log();"  />
+					<Editor light={data === 'on' ? true: false } initialValue=""  />
 				</Resizable>
 				<Preview />
 			</PlaygroungWrapper>
+			<Footer>
+				<p>
+           <span>made with &#10084;&#65039; by</span><a target="_blank" href="https://github.com/islamghany">islamghany</a>
+				</p>
+			</Footer>
 		</Container>
 		</ThemeProvider>
 	);

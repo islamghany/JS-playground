@@ -20,6 +20,7 @@ const bundle = async (rawCode: string) => {
       define: {
         'process.env.NODE_ENV': '"production"',
         global: 'window',
+        'console.log':'show'
       },
     });
 
