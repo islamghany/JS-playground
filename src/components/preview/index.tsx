@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 //import LogsContainer from "../console";
 //import Resizable from "../resizable/index";
-import { useError,usePreview } from "../../hooks/playground";
+import { useError,usePreview,useListen } from "../../hooks/playground";
 
 const PreviewContainer = styled.div`
   position: relative;
@@ -11,11 +11,11 @@ const PreviewContainer = styled.div`
   display:flex;
   flex-direction:column;
   justify-content: space-between;
- 
+
  iframe {
   width: 100%;
   border:0;
-  background:#fff;
+  background:${({theme})=>theme.colors.bg};
   flex:1
 }
 
@@ -37,10 +37,10 @@ const PreviewContainer = styled.div`
 `
 
 
-const html = `
+const html=(bg="#fff",color="#222") => `
     <html>
       <head>
-        <style>html { background-color: white; }</style>
+        <style>html{background:${bg};color:${color};}</style>
       </head>
       <body>
         <div id="root"></div>
@@ -71,14 +71,14 @@ const html = `
 
 const RenderFrame = ()=>{
   const {data} = usePreview()
-
+  const theme = useListen('theme');
   const iframe = useRef<any>();
   useEffect(() => {
-    iframe.current.srcdoc = html;
+    iframe.current.srcdoc = html(theme.data === "on" ? "#fafafa" : "#222",theme.data === "on" ? "#222" : "#fff");
     setTimeout(() => {
       iframe.current.contentWindow.postMessage(data, '*');
     }, 50);
-  }, [data]);
+  }, [data,theme.data]);
   return <iframe
       title="preview"
       ref={iframe}
@@ -98,7 +98,6 @@ const Preview: React.FC = () => {
     <PreviewContainer>
     <RenderFrame />
     <RenderError />
-   
   </PreviewContainer>
   );
 };

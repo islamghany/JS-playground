@@ -3,10 +3,10 @@
   "header": {
     "event": "Allocation failed - JavaScript heap out of memory",
     "trigger": "FatalError",
-    "filename": "report.20210218.203349.14889.0.001.json",
-    "dumpEventTime": "2021-02-18T20:33:49Z",
-    "dumpEventTimeStamp": "1613673229217",
-    "processId": 14889,
+    "filename": "report.20210403.173511.2583.0.001.json",
+    "dumpEventTime": "2021-04-03T17:35:12Z",
+    "dumpEventTimeStamp": "1617464112285",
+    "processId": 2583,
     "cwd": "/media/isalm/New Volume/web/code/reactjs/js-playground/js-playground",
     "commandLine": [
       "/usr/bin/node",
@@ -42,8 +42,8 @@
       "sourceUrl": "https://nodejs.org/download/release/v12.0.0/node-v12.0.0.tar.gz"
     },
     "osName": "Linux",
-    "osRelease": "4.15.0-135-generic",
-    "osVersion": "#139-Ubuntu SMP Mon Jan 18 17:39:27 UTC 2021",
+    "osRelease": "4.15.0-140-generic",
+    "osVersion": "#144-Ubuntu SMP Fri Mar 19 14:13:54 UTC 2021",
     "osMachine": "i686",
     "host": "ghany"
   },
@@ -99,19 +99,19 @@
       "symbol": " [/usr/bin/node]"
     },
     {
-      "pc": "0x3e79b35b",
-      "symbol": ""
-    },
-    {
-      "pc": "0x3e7cee2b",
-      "symbol": ""
-    },
-    {
-      "pc": "0x094cfffc",
+      "pc": "0x0955c38d",
       "symbol": " [/usr/bin/node]"
     },
     {
-      "pc": "0x0956c4bb",
+      "pc": "0x55c2e3a0",
+      "symbol": ""
+    },
+    {
+      "pc": "0x55c2d26b",
+      "symbol": ""
+    },
+    {
+      "pc": "0x094d61a3",
       "symbol": " [/usr/bin/node]"
     },
     {
@@ -263,16 +263,16 @@
       "symbol": "main [/usr/bin/node]"
     },
     {
-      "pc": "0xb7addf21",
+      "pc": "0xb7a90f21",
       "symbol": "__libc_start_main [/lib/i386-linux-gnu/libc.so.6]"
     }
   ],
   "javascriptHeap": {
-    "totalMemory": 512868352,
-    "totalCommittedMemory": 510328024,
-    "usedMemory": 500182372,
-    "availableMemory": 38938792,
-    "memoryLimit": 538968064,
+    "totalMemory": 519327744,
+    "totalCommittedMemory": 514931280,
+    "usedMemory": 503682708,
+    "availableMemory": 25333796,
+    "memoryLimit": 540016640,
     "heapSpaces": {
       "read_only_space": {
         "memorySize": 524288,
@@ -282,38 +282,38 @@
         "available": 502592
       },
       "new_space": {
-        "memorySize": 2097152,
-        "committedMemory": 1223328,
-        "capacity": 1048264,
-        "used": 174456,
-        "available": 873808
+        "memorySize": 4194304,
+        "committedMemory": 1338884,
+        "capacity": 2096528,
+        "used": 289380,
+        "available": 1807148
       },
       "old_space": {
-        "memorySize": 427888640,
-        "committedMemory": 427361392,
-        "capacity": 425558328,
-        "used": 419312492,
-        "available": 6245836
+        "memorySize": 444665856,
+        "committedMemory": 444241808,
+        "capacity": 435082948,
+        "used": 434844316,
+        "available": 238632
       },
       "code_space": {
         "memorySize": 2256896,
-        "committedMemory": 2186112,
-        "capacity": 1668896,
-        "used": 1668896,
+        "committedMemory": 1931360,
+        "capacity": 1665056,
+        "used": 1665056,
         "available": 0
       },
       "map_space": {
-        "memorySize": 2625536,
-        "committedMemory": 2059656,
-        "capacity": 1643800,
-        "used": 1643800,
+        "memorySize": 2101248,
+        "committedMemory": 1812380,
+        "capacity": 1387640,
+        "used": 1387640,
         "available": 0
       },
       "large_object_space": {
-        "memorySize": 77426688,
-        "committedMemory": 77426688,
-        "capacity": 77359268,
-        "used": 77359268,
+        "memorySize": 65536000,
+        "committedMemory": 65536000,
+        "capacity": 65472856,
+        "used": 65472856,
         "available": 0
       },
       "code_large_object_space": {
@@ -326,32 +326,32 @@
       "new_large_object_space": {
         "memorySize": 0,
         "committedMemory": 0,
-        "capacity": 5216844,
+        "capacity": 2096528,
         "used": 0,
-        "available": 5216844
+        "available": 2096528
       }
     }
   },
   "resourceUsage": {
-    "userCpuSeconds": 69.4782,
-    "kernelCpuSeconds": 6.57808,
-    "cpuConsumptionPercent": 18.7331,
-    "maxRss": 566345728,
+    "userCpuSeconds": 65.6876,
+    "kernelCpuSeconds": 4.24728,
+    "cpuConsumptionPercent": 32.3773,
+    "maxRss": 583979008,
     "pageFaults": {
-      "IORequired": 87,
-      "IONotRequired": 327112
+      "IORequired": 29,
+      "IONotRequired": 273156
     },
     "fsActivity": {
-      "reads": 130104,
+      "reads": 120608,
       "writes": 0
     }
   },
   "uvthreadResourceUsage": {
-    "userCpuSeconds": 32.676,
-    "kernelCpuSeconds": 4.8984,
-    "cpuConsumptionPercent": 9.25478,
+    "userCpuSeconds": 29.3147,
+    "kernelCpuSeconds": 3.22958,
+    "cpuConsumptionPercent": 15.0668,
     "fsActivity": {
-      "reads": 92712,
+      "reads": 76400,
       "writes": 0
     }
   },
@@ -364,16 +364,18 @@
     "npm_config_legacy_bundling": "",
     "npm_config_sign_git_tag": "",
     "LANGUAGE": "en_US",
+    "PT7HOME": "/opt/pt",
     "LC_TIME": "ar_EG.UTF-8",
     "USER": "isalm",
     "npm_package_dependencies__types_jest": "^26.0.20",
+    "npm_package_dependencies_react_resizable": "1.11.0",
     "npm_config_user_agent": "npm/6.9.0 node/v12.0.0 linux ia32",
     "npm_config_always_auth": "",
     "XDG_SEAT": "seat0",
     "npm_config_bin_links": "true",
     "npm_config_key": "",
     "XDG_SESSION_TYPE": "x11",
-    "SSH_AGENT_PID": "1169",
+    "SSH_AGENT_PID": "2083",
     "npm_config_allow_same_version": "",
     "npm_config_description": "true",
     "npm_config_fetch_retries": "2",
@@ -386,7 +388,7 @@
     "npm_config_prefer_online": "",
     "npm_config_noproxy": "",
     "HOME": "/home/isalm",
-    "OLDPWD": "/media/isalm/New Volume/web/code/reactjs/js-playground",
+    "OLDPWD": "/media/isalm/New Volume/web/code/reactjs/js-playground/js-playground",
     "LESS": "-R",
     "npm_package_browserslist_production_0": ">0.2%",
     "npm_config_force": "",
@@ -397,6 +399,7 @@
     "ZSH": "/home/isalm/.oh-my-zsh",
     "LSCOLORS": "Gxfxcxdxbxegedabagacad",
     "npm_package_dependencies__monaco_editor_react": "3.7.5",
+    "npm_package_dependencies_framer_motion": "^3.6.2",
     "npm_package_browserslist_production_2": "not op_mini all",
     "npm_config_cache_min": "10",
     "npm_config_init_license": "ISC",
@@ -405,8 +408,10 @@
     "npm_config_editor": "vi",
     "npm_config_rollback": "true",
     "npm_config_tag_version_prefix": "v",
+    "LC_CTYPE": "en_US.UTF-8",
     "LC_MONETARY": "ar_EG.UTF-8",
     "npm_package_dependencies__types_styled_components": "^5.1.7",
+    "npm_package_dependencies_esbuild_wasm": "0.8.27",
     "npm_config_cache_max": "Infinity",
     "npm_config_timing": "",
     "npm_config_userconfig": "/home/isalm/.npmrc",
@@ -446,6 +451,7 @@
     "npm_config_shell": "/usr/bin/zsh",
     "_": "/usr/bin/npm",
     "npm_package_private": "true",
+    "npm_package_dependencies__types_react_resizable": "1.7.2",
     "npm_config_dry_run": "",
     "npm_config_prefix": "/usr",
     "DEFAULTS_PATH": "/usr/share/gconf/Lubuntu.default.path",
@@ -466,12 +472,14 @@
     "npm_config_global_style": "",
     "npm_config_ignore_scripts": "",
     "npm_config_version": "",
+    "LC_COLLATE": "en_US.UTF-8",
     "npm_package_dependencies_axios": "^0.21.1",
     "npm_package_browserslist_development_0": "last 1 chrome version",
     "npm_config_local_address": "",
     "npm_config_viewer": "man",
     "npm_config_node_gyp": "/usr/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
-    "PATH": "/usr/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/media/isalm/New Volume/web/code/reactjs/js-playground/js-playground/node_modules/.bin:/home/isalm/.local/share/umake/bin:/home/isalm/bin:/home/isalm/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "PATH": "/usr/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/media/isalm/New Volume/web/code/reactjs/js-playground/js-playground/node_modules/.bin:/home/isalm/.cargo/bin:/home/isalm/.local/share/umake/bin:/home/isalm/bin:/home/isalm/.local/bin:/usr/local/bin:/usr/bin:/bin:/snap/bin:/usr/local/go/bin:/home/isalm/work/bin",
+    "PAPERSIZE": "a4",
     "GDM_LANG": "en_US",
     "npm_package_name": "js-playground",
     "npm_package_browserslist_development_1": "last 1 firefox version",
@@ -480,6 +488,7 @@
     "NODE": "/usr/bin/node",
     "LC_ADDRESS": "ar_EG.UTF-8",
     "XDG_MENU_PREFIX": "lxde-",
+    "S_COLORS": "auto",
     "XDG_RUNTIME_DIR": "/run/user/1000",
     "XDG_SESSION_PATH": "/org/freedesktop/DisplayManager/Session0",
     "npm_package_dependencies_jscodeshift": "0.11.0",
@@ -495,6 +504,7 @@
     "LC_TELEPHONE": "ar_EG.UTF-8",
     "LANG": "en_US.UTF-8",
     "XDG_CURRENT_DESKTOP": "LXDE",
+    "npm_package_dependencies_console_feed": "^3.2.2",
     "npm_package_dependencies_react_dom": "^17.0.1",
     "npm_config_umask": "0002",
     "XAUTHORITY": "/home/isalm/.Xauthority",
@@ -503,14 +513,15 @@
     "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
     "npm_package_dependencies__types_node": "^12.20.1",
     "npm_package_eslintConfig_extends_0": "react-app",
-    "npm_package_gitHead": "2360662df28e8f17547bab200191c3f2acff5ff1",
+    "npm_package_gitHead": "af5c6db61aa88414f786ae3801aad6a297dbcd0a",
     "npm_config_fetch_retry_maxtimeout": "60000",
     "npm_config_loglevel": "notice",
     "npm_config_logs_max": "10",
     "npm_config_message": "%s",
     "npm_lifecycle_script": "react-scripts start",
+    "LC_MESSAGES": "en_US.UTF-8",
     "XDG_GREETER_DATA_DIR": "/var/lib/lightdm-data/isalm",
-    "SSH_AUTH_SOCK": "/tmp/ssh-40VusXkWtN6m/agent.1102",
+    "SSH_AUTH_SOCK": "/tmp/ssh-7cbRLQ8jOyvh/agent.2008",
     "npm_package_scripts_test": "react-scripts test",
     "npm_package_eslintConfig_extends_1": "react-app/jest",
     "npm_config_ca": "",
@@ -518,6 +529,7 @@
     "npm_config_global": "",
     "npm_config_link": "",
     "LC_NAME": "ar_EG.UTF-8",
+    "GOPATH": "/home/isalm/work",
     "SHELL": "/usr/bin/zsh",
     "npm_package_version": "0.1.0",
     "npm_package_dependencies__testing_library_jest_dom": "^5.11.9",
@@ -540,7 +552,7 @@
     "npm_config_node_version": "12.0.0",
     "npm_config_tag": "latest",
     "LC_MEASUREMENT": "ar_EG.UTF-8",
-    "_LXSESSION_PID": "1102",
+    "_LXSESSION_PID": "2008",
     "npm_config_git_tag_version": "true",
     "npm_config_commit_hooks": "true",
     "npm_config_script_shell": "",
@@ -556,6 +568,7 @@
     "npm_config_globalconfig": "/usr/etc/npmrc",
     "npm_config_init_module": "/home/isalm/.npm-init.js",
     "npm_config_parseable": "",
+    "LC_ALL": "en_US.UTF-8",
     "PWD": "/media/isalm/New Volume/web/code/reactjs/js-playground/js-playground",
     "npm_config_globalignorefile": "/usr/etc/npmignore",
     "npm_execpath": "/usr/lib/node_modules/npm/bin/npm-cli.js",
@@ -570,6 +583,7 @@
     "npm_config_scripts_prepend_node_path": "warn-only",
     "LC_PAPER": "ar_EG.UTF-8",
     "npm_package_dependencies__types_jscodeshift": "0.7.2",
+    "npm_package_dependencies_react_query": "^3.9.8",
     "npm_config_group": "1000",
     "npm_config_init_author_email": "",
     "npm_config_searchexclude": "",
@@ -579,6 +593,7 @@
     "npm_config_git": "git",
     "npm_config_optional": "true",
     "npm_package_dependencies__types_react_dom": "^17.0.1",
+    "npm_package_dependencies_localforage": "1.9.0",
     "npm_package_dependencies_react": "^17.0.1",
     "npm_config_json": "",
     "INIT_CWD": "/media/isalm/New Volume/web/code/reactjs/js-playground/js-playground",
@@ -621,8 +636,8 @@
       "hard": "unlimited"
     },
     "max_user_processes": {
-      "soft": 15421,
-      "hard": 15421
+      "soft": 15424,
+      "hard": 15424
     },
     "virtual_memory_kbytes": {
       "soft": "unlimited",

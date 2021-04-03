@@ -9,7 +9,7 @@ import {useListen} from './hooks/playground'
 import {ThemeProvider} from 'styled-components';
 import {light,dark} from './utils/theme';
 import GlobalStyle from './utils/style'
-
+import Loader from "./components/loader"
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -36,7 +36,7 @@ const PlaygroungWrapper = styled.div`
 		flex-direction:column;
 		width:100%;
 		position: relative;
-       
+
 	}
 
 	.react-resizable-handle-n {
@@ -54,22 +54,23 @@ const PlaygroungWrapper = styled.div`
 	.react-resizable-handle-e {
 		width: 10px;
 		min-width: 10px;
-		height: 100%;	
+		height: 100%;
 		cursor: col-resize;
-		background: ${({theme})=>theme.colors.bg};
+		background: ${({theme})=>theme.colors.bar};
 	}
 `;
 
 const App = () => {
 	const {data} = useListen('theme');
 	return (
-		 <ThemeProvider theme={data === 'on' ? light: dark }>
+	<ThemeProvider theme={data === 'on' ? light: dark }>
   <GlobalStyle />
 		<Container>
 			<Header />
+			<Loader />
 			<PlaygroungWrapper>
 				<Resizable direction="horizontal">
-					<Editor light={data === 'on' ? true: false } initialValue="// use show() instead of console.log();"  />	
+					<Editor light={data === 'on' ? true: false } initialValue="// use show() instead of console.log();"  />
 				</Resizable>
 				<Preview />
 			</PlaygroungWrapper>

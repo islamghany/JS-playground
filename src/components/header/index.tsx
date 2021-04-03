@@ -14,11 +14,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Toggle from "../toggle/index";
 import { useQuery } from "react-query";
+import Loader from "../loader"
+
 const HeaderContainer = styled.header`
 	display: flex;
 	width: 100%;
 	background: ${({ theme }) => theme.colors.bg};
-	border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+	border-bottom:${({ theme }) => theme.colors.border};
 	padding: 1rem 3rem;
 	justify-content: space-between;
 	button {
@@ -42,14 +44,19 @@ const Run = () => {
 		update("error", output.err);
 	};
 	const onClick = async () => {
-		makeBundle();
+		 makeBundle();
 	};
+	const firstGlance = async ()=>{
+		await makeBundle();
+		update("loading",false)
+	}
 	useEffect(() => {
-		if (isSync.data === "off") return;
 		if (!mountRef.current) {
 			mountRef.current = true;
+			firstGlance();
 			return;
 		}
+		if (isSync.data === "off") return;
 		if (timer) {
 			clearTimeout(timer);
 		}

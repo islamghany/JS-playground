@@ -7,7 +7,12 @@ const options = {
 	staleTime: Infinity,
 	cacheTime: Infinity,
 };
-
+export const useLoading = ()=>{
+	return useQuery('loading',()=>{},{
+		...options,
+		initialData:true
+	})
+}
 export const useListen = (key: string) => {
 	return useQuery(key, () => {}, {
 		...options,
@@ -17,7 +22,26 @@ export const useListen = (key: string) => {
 export const useCode = () => {
 	return useQuery("code", () => {}, {
 		...options,
-		initialData: "",
+		initialData: `
+	     import _React from 'react';
+	     import _ReactDOM from 'react-dom';
+	     var show = (value) => {
+	       const root = document.querySelector('#root');
+	       if (typeof value === 'object') {
+	         if (value.$$typeof && value.props) {
+	           _ReactDOM.render(value, root);
+	         } else {
+	           var node = document.createElement("div");
+	           node.innerHTML = JSON.stringify(value);
+	           root.appendChild(node);
+	         }
+	       } else {
+	           var node = document.createElement("div");
+	           node.innerHTML = value;
+	           root.appendChild(node);
+	       }
+	     };
+	   `,
 	});
 };
 export const useSyncCode = () => {
