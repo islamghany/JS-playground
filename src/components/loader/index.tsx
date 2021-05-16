@@ -1,5 +1,5 @@
-import styled,{keyframes} from 'styled-components';
-import {useLoading} from '../../hooks/playground'
+import styled, { keyframes } from "styled-components";
+import { useLoading } from "../../hooks/playground";
 const rotate = keyframes`
 0% {
   transform: rotate(30deg);
@@ -22,10 +22,10 @@ const rotate = keyframes`
 100% {
   transform: rotate(390deg);
 }
-`
+`;
 const Container = styled.div`
 .modal{
-  background:${({theme})=>theme.colors.bg};
+  background:${({ theme }) => theme.colors.bg};
 
       position: absolute;
       height: 100vh;
@@ -39,11 +39,11 @@ const Container = styled.div`
       z-index: 1000;
       h5{
         margin-top: 20px;
-        color:${({theme})=>theme.colors.mainText};
+        color:${({ theme }) => theme.colors.mainText};
       }
       &__container{
 
-        background:${({theme})=>theme.colors.bg};
+        background:${({ theme }) => theme.colors.bg};
         width: 200px;
         min-height:150px;
         padding: 30px;
@@ -62,7 +62,7 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       position: relative;
-      background:${({theme})=>theme.colors.primary};
+      background:${({ theme }) => theme.colors.primary};
       transform: rotate(30deg);
       animation: ${rotate} 6.5s cubic-bezier(0.74, 0.61, 0, 1.33) infinite;
       &__part {
@@ -78,7 +78,7 @@ const Container = styled.div`
       &__part:before {
         content: " ";
         display: block;
-        background:${({theme})=>theme.colors.bg};
+        background:${({ theme }) => theme.colors.bg};
         height: 26px;
         width: 26px;
         border-radius: 13px;
@@ -90,8 +90,8 @@ const Container = styled.div`
         width: 12px;
         margin-top: 11px;
         right: -5px;
-        background:${({theme})=>theme.colors.bg};
-        border: 2px solid ${({theme})=>theme.colors.bg};
+        background:${({ theme }) => theme.colors.bg};
+        border: 2px solid ${({ theme }) => theme.colors.bg};
       }
       }
 
@@ -113,27 +113,28 @@ const Container = styled.div`
       section:nth-of-type(6){
       transform: rotateZ(calc( 60deg * 6 ) );
       }
-`
-const Loading = ()=>{
-  const {data} = useLoading();
-	if(data){
-	return <Container >
-    <div className="modal">
-	   <div className="modal__container">
-	   <div className="revolver">
-		  <section className="revolver__part"></section>
-		  <section className="revolver__part"></section>
-		  <section className="revolver__part"></section>
-		  <section className="revolver__part"></section>
-		  <section className="revolver__part"></section>
-		  <section className="revolver__part"></section>
-		</div>
-		<h5>Loading Packages....</h5>
-	   </div>
-   </div>
-   </Container>
-	}
-	return null
-
-}
+`;
+const Loading = () => {
+  const { data } = useLoading();
+  if (data) {
+    return (
+      <Container>
+        <div className="modal">
+          <div className="modal__container">
+            <div className="revolver">
+              <section className="revolver__part"></section>
+              <section className="revolver__part"></section>
+              <section className="revolver__part"></section>
+              <section className="revolver__part"></section>
+              <section className="revolver__part"></section>
+              <section className="revolver__part"></section>
+            </div>
+            <h5>Loading Packages....</h5>
+          </div>
+        </div>
+      </Container>
+    );
+  }
+  return null;
+};
 export default Loading;

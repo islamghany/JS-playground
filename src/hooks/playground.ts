@@ -2,27 +2,27 @@ import { useQuery, useMutation } from "react-query";
 import client from "./index";
 
 const options = {
-	enabled: false,
-	retry: false,
-	staleTime: Infinity,
-	cacheTime: Infinity,
+  enabled: false,
+  retry: false,
+  staleTime: Infinity,
+  cacheTime: Infinity,
 };
-export const useLoading = ()=>{
-	return useQuery('loading',()=>{},{
-		...options,
-		initialData:true
-	})
-}
+export const useLoading = () => {
+  return useQuery("loading", () => {}, {
+    ...options,
+    initialData: true,
+  });
+};
 export const useListen = (key: string) => {
-	return useQuery(key, () => {}, {
-		...options,
-		initialData: localStorage.getItem(key),
-	});
+  return useQuery(key, () => {}, {
+    ...options,
+    initialData: localStorage.getItem(key),
+  });
 };
 export const useCode = () => {
-	return useQuery("code", () => {}, {
-		...options,
-		initialData: `
+  return useQuery("code", () => {}, {
+    ...options,
+    initialData: `
 	     import _React from 'react';
 	     import _ReactDOM from 'react-dom';
 	     var show = (value) => {
@@ -42,31 +42,31 @@ export const useCode = () => {
 	       }
 	     };
 	   `,
-	});
+  });
 };
 export const useSyncCode = () => {
-	return useQuery("sync-code", () => {}, {
-		...options,
-		initialData: "",
-	});
+  return useQuery("sync-code", () => {}, {
+    ...options,
+    initialData: "",
+  });
 };
 export const useError = () => {
-	return useQuery("error", () => {}, options);
+  return useQuery("error", () => {}, options);
 };
 export const usePreview = () => {
-	return useQuery("preview", () => {}, options);
+  return useQuery("preview", () => {}, options);
 };
 export const useTheme = () => {
-	const theme = localStorage.getItem("playground-theme");
-	return useQuery("theme", () => {}, {
-		...options,
-		initialData: theme,
-	});
+  const theme = localStorage.getItem("playground-theme");
+  return useQuery("theme", () => {}, {
+    ...options,
+    initialData: theme,
+  });
 };
 export const update = (key: string, value: string) => {
-	client.setQueryData(`${key}`, value);
+  client.setQueryData(`${key}`, value);
 };
 export const updateStorage = (key: string, value: string) => {
-	localStorage.setItem(key, value);
-	client.setQueryData(`${key}`, value);
+  localStorage.setItem(key, value);
+  client.setQueryData(`${key}`, value);
 };

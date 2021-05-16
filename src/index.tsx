@@ -1,15 +1,15 @@
 //import * as esbuild from 'esbuild-wasm';
 //import  { useState, useEffect, useRef } from 'react';
-import {render} from 'react-dom';
-import App from './App'
-import {QueryClientProvider} from 'react-query';
-import client from './hooks/index'
+import { render } from "react-dom";
+import App from "./App";
+import { QueryClientProvider } from "react-query";
+import client from "./hooks/index";
 // import { unpkgPathPlugin } from './bundle/plugins/unpkg-path-plugin';
 // import { fetchPlugin } from './bundle/plugins/fetch-plugin';
 // import Editor from './components/editor/';
 // import Preview from './components/preview';
 
-const Root=()=>{
+const Root = () => {
   //const ref = useRef<any>();
   // const [code, setCode] = useState('');
   // const [input, setInput] = useState('');
@@ -55,9 +55,11 @@ const Root=()=>{
   //     <Preview code={code} />
   //   </div>
   // );
-  return <QueryClientProvider client={client}> 
-  <App/>
-  </QueryClientProvider>  
+  return (
+    <QueryClientProvider client={client}>
+      <App />
+    </QueryClientProvider>
+  );
 };
 
-render(<Root />,document.querySelector('#root'));
+render(<Root />, document.querySelector("#root"));

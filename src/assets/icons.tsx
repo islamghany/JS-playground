@@ -1,9 +1,9 @@
-interface Props{
-  color?:string;
-  size?:number;
+interface Props {
+  color?: string;
+  size?: number;
 }
 
-export const Delete:React.FC = (props) =>{
+export const Delete: React.FC = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,39 +21,39 @@ export const Delete:React.FC = (props) =>{
       />
     </svg>
   );
-}
+};
 
-export const Setting:React.FC<Props> = (props) =>{
+export const Setting: React.FC<Props> = (props) => {
   return (
     <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width={24}
-  height={24}
-  fill="none"
-  viewBox="0 0 24 24"
-  {...props}
->
-  <path
-    stroke="#200E32"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth={1.5}
-    d="M20.807 7.624l-.623-1.08a1.913 1.913 0 00-2.608-.705v0a1.904 1.904 0 01-2.61-.678 1.832 1.832 0 01-.255-.915v0a1.913 1.913 0 00-1.914-1.968h-1.254A1.904 1.904 0 009.64 4.191v0a1.913 1.913 0 01-1.913 1.886 1.83 1.83 0 01-.916-.257v0a1.913 1.913 0 00-2.608.705l-.669 1.099a1.913 1.913 0 00.696 2.608v0a1.913 1.913 0 010 3.314v0a1.904 1.904 0 00-.696 2.6v0l.632 1.089a1.913 1.913 0 002.609.741v0a1.894 1.894 0 012.6.696c.164.277.252.593.255.915v0c0 1.056.857 1.913 1.913 1.913h1.255c1.053 0 1.908-.85 1.912-1.904v0a1.904 1.904 0 011.914-1.913c.321.009.636.097.915.256v0a1.913 1.913 0 002.609-.695v0l.659-1.099a1.904 1.904 0 00-.696-2.608v0a1.904 1.904 0 01-.696-2.61c.166-.289.406-.529.696-.695v0a1.913 1.913 0 00.696-2.6v0-.008z"
-    clipRule="evenodd"
-  />
-  <circle
-    cx={12.175}
-    cy={11.889}
-    r={2.636}
-    stroke="#200E32"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth={1.5}
-  />
-</svg>
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      fill="none"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        stroke="#200E32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M20.807 7.624l-.623-1.08a1.913 1.913 0 00-2.608-.705v0a1.904 1.904 0 01-2.61-.678 1.832 1.832 0 01-.255-.915v0a1.913 1.913 0 00-1.914-1.968h-1.254A1.904 1.904 0 009.64 4.191v0a1.913 1.913 0 01-1.913 1.886 1.83 1.83 0 01-.916-.257v0a1.913 1.913 0 00-2.608.705l-.669 1.099a1.913 1.913 0 00.696 2.608v0a1.913 1.913 0 010 3.314v0a1.904 1.904 0 00-.696 2.6v0l.632 1.089a1.913 1.913 0 002.609.741v0a1.894 1.894 0 012.6.696c.164.277.252.593.255.915v0c0 1.056.857 1.913 1.913 1.913h1.255c1.053 0 1.908-.85 1.912-1.904v0a1.904 1.904 0 011.914-1.913c.321.009.636.097.915.256v0a1.913 1.913 0 002.609-.695v0l.659-1.099a1.904 1.904 0 00-.696-2.608v0a1.904 1.904 0 01-.696-2.61c.166-.289.406-.529.696-.695v0a1.913 1.913 0 00.696-2.6v0-.008z"
+        clipRule="evenodd"
+      />
+      <circle
+        cx={12.175}
+        cy={11.889}
+        r={2.636}
+        stroke="#200E32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+    </svg>
   );
-}
-export const Upload:React.FC<Props> = (props) =>{
+};
+export const Upload: React.FC<Props> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -72,47 +72,46 @@ export const Upload:React.FC<Props> = (props) =>{
       />
     </svg>
   );
-}
+};
 
-export const Roller:React.FC<Props> = (props) =>{
+export const Roller: React.FC<Props> = (props) => {
   return (
     <svg
-     xmlns="http://www.w3.org/2000/svg"
-     width={24}
-     height={24}
-     fill="none"
-     viewBox="0 0 24 24"
-     {...props}
-   >
-     <path
-       stroke="#200E32"
-       strokeLinecap="round"
-       strokeLinejoin="round"
-       strokeWidth={1.5}
-       d="M21.21 7.9v8.15c0 3.02-1.89 5.15-4.91 5.15H7.65c-3.02 0-4.9-2.13-4.9-5.15V7.9c0-3.02 1.89-5.15 4.9-5.15h8.65c3.02 0 4.91 2.13 4.91 5.15z"
-       clipRule="evenodd"
-     />
-     <path
-       stroke="#200E32"
-       strokeLinecap="round"
-       strokeLinejoin="round"
-       strokeWidth={1.5}
-       d="M5.281 16.432l1.53-1.613a1.405 1.405 0 012.031-.008l.885.903c.597.61 1.59.565 2.131-.094l2.23-2.71a1.687 1.687 0 012.514-.105l2.076 2.142"
-     />
-     <path
-       stroke="#200E32"
-       strokeLinecap="round"
-       strokeLinejoin="round"
-       strokeWidth={1.5}
-       d="M10.313 9.134a1.754 1.754 0 11-3.506 0 1.754 1.754 0 013.506 0z"
-       clipRule="evenodd"
-     />
-   </svg>
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      fill="none"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        stroke="#200E32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M21.21 7.9v8.15c0 3.02-1.89 5.15-4.91 5.15H7.65c-3.02 0-4.9-2.13-4.9-5.15V7.9c0-3.02 1.89-5.15 4.9-5.15h8.65c3.02 0 4.91 2.13 4.91 5.15z"
+        clipRule="evenodd"
+      />
+      <path
+        stroke="#200E32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M5.281 16.432l1.53-1.613a1.405 1.405 0 012.031-.008l.885.903c.597.61 1.59.565 2.131-.094l2.23-2.71a1.687 1.687 0 012.514-.105l2.076 2.142"
+      />
+      <path
+        stroke="#200E32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M10.313 9.134a1.754 1.754 0 11-3.506 0 1.754 1.754 0 013.506 0z"
+        clipRule="evenodd"
+      />
+    </svg>
   );
-}
+};
 
-
-export const Download:React.FC<Props> = (props) =>{
+export const Download: React.FC<Props> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -138,8 +137,8 @@ export const Download:React.FC<Props> = (props) =>{
       />
     </svg>
   );
-}
-export const Close:React.FC<Props> = ({size=24,color="#200E32"}) =>{
+};
+export const Close: React.FC<Props> = ({ size = 24, color = "#200E32" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +146,6 @@ export const Close:React.FC<Props> = ({size=24,color="#200E32"}) =>{
       height={size}
       fill="none"
       viewBox="0 0 24 24"
-
     >
       <path
         fill={color}
@@ -157,4 +155,4 @@ export const Close:React.FC<Props> = ({size=24,color="#200E32"}) =>{
       />
     </svg>
   );
-}
+};
