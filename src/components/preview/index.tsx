@@ -39,7 +39,15 @@ const PreviewContainer = styled.div`
 const html = (bg = "#fff", color = "#222") => `
     <html>
       <head>
-        <style>html{background:${bg};color:${color};}</style>
+        <style>
+        html{
+          background:${bg};
+          color:${color};
+      }
+      ol li{
+        font-size:15px !important;
+      }
+      </style>
       </head>
       <body>
         <div id="root"></div>

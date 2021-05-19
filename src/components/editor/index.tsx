@@ -9,22 +9,39 @@ import Button from "../button/index";
 import { update, useListen } from "../../hooks/playground";
 const download = require("downloadjs");
 const showFunc = `
-    import _React from 'react';
+    import _React from 'react'
     import _ReactDOM from 'react-dom';
+    import Inspector from 'react-inspector'
+    let ___outputs=[];
     var show = (value) => {
+      let React = _React;
       const root = document.querySelector('#root');
       if (typeof value === 'object') {
         if (value.$$typeof && value.props) {
           _ReactDOM.render(value, root);
+          // _ReactDOM.render(<div>
+          //   <Inspector data={value} />
+          //   </div>,root);
         } else {
-          var node = document.createElement("div");
-          node.innerHTML = JSON.stringify(value);
-          root.appendChild(node);
+            // var node = document.createElement('div')
+            // node.innerHTML = '<Inspector data={{name:1}} />'
+            // root.appendChild(node);
+            ___outputs.push(value);
+            _ReactDOM.render(<div>
+              {___outputs.map(data=> <Inspector theme="chromeDark" data={data} />)}
+              </div>, root);
         }
+
+
       } else {
-          var node = document.createElement("div");
-          node.innerHTML = value;
-          root.appendChild(node);
+          // var node = document.createElement("div");
+          // node.innerHTML = value;
+          // root.appendChild(node);
+          ___outputs.push(value);
+          _ReactDOM.render(<div style={{fontSize:'16px !important'}}>
+            {___outputs.map(data=> <Inspector theme="chromeDark" data={data} />)}
+            </div>, root);
+          //_ReactDOM.render(<ObjectRootLabel theme="chromeDark" data={value} />,root);
       }
     };
   `;
